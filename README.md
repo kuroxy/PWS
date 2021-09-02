@@ -1,18 +1,18 @@
-## PWS
+# PWS
 
-#ONDERWERP
+##ONDERWERP
 Encryptie & Ciphers
 
-#Onderzoeksvraag :
+##Onderzoeksvraag :
 Hoe kraak je oude encrypties/ciphers met de techniek van vandaag?
 
-#Deelvragen
+##Deelvragen
 -Hoe herken je een soort encryptie/cipher
 -Hoe decode je het
 -Hoe kan je de oudere encrypties/ciphers verbeteren
 
 
-Bronnen:
+###Bronnen:
 -https://ep.liu.se/ecp/149/015/ecp18149015.pdf (Ww1 document cryptogrammen)
 -https://www.tandfonline.com/doi/abs/10.1080/14682745.2014.920825 
 
