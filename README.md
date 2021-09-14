@@ -31,4 +31,5 @@
 - https://www.researchgate.net/profile/Robbi-Rahim/publication/312651703_Data_Security_Using_Vigenere_Cipher_and_Goldbach_Codes_Algorithm/links/588762edaca272b7b4522a6a/Data-Security-Using-Vigenere-Cipher-and-Goldbach-Codes-Algorithm.pdf
 - https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.402.8295&rep=rep1&type=pdf
 - https://www.researchgate.net/profile/Tonni-Limbong/publication/313769905_Testing_the_Classic_Caesar_Cipher_Cryptography_using_of_Matlab/links/58a5717492851cf0e3936494/Testing-the-Classic-Caesar-Cipher-Cryptography-using-of-Matlab.pdf
+- https://books.google.nl/books?hl=nl&lr=&id=AU76DwAAQBAJ&oi=fnd&pg=PR19&dq=cracking+ciphers&ots=Fd3982R9-j&sig=mNULHP4NuieAkPvELAXvFGIMFXk&redir_esc=y#v=onepage&q=cracking%20ciphers&f=false
 - 
