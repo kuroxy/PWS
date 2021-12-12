@@ -3,6 +3,11 @@ from math import ceil
 tekst = "De sleutel opent het slot van de kist" # wat je wil versleutelen
 sleutel = "desleutel" # geheime sleutel
 
+# ZELFINPUT aan als je zelf wilt invoeren tijdens running van het programmad
+ZELFINPUT = False
+if ZELFINPUT:
+    tekst = input("Tekst: ")
+    sleutel = input("Sleutel: ")
 
 # tekst allemaal kleine letters van maken en spaties weg halen
 sleutel = sleutel.lower()
@@ -31,7 +36,7 @@ for i in cipherrij:
 print(f"originele tekst    : {tekst}")
 print(f"sleutel            : {sleutel}")
 print()
-print(" ".join(i[1] for i in rijen))
+print(" ".join(i[0] for i in rijen))
 print("-"*len(rijen)*2)
 for i in range(len(tekst)):
     if i%sleutellengte ==0 and i!=0:
@@ -39,7 +44,7 @@ for i in range(len(tekst)):
     print(f"{tekst[i]} ",end="")
 print("\n")
 
-print(" ".join(i[1] for i in cipherrij))
+print(" ".join(i[0] for i in cipherrij))
 print("-"*len(rijen)*2)
 for i in range(ceil(len(tekst)/sleutellengte)):
     for j in range(len(cipherrij)):
