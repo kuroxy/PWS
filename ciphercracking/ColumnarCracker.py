@@ -31,9 +31,10 @@ def countquadgrams(text):  # sourcery skip: use-dict-items
 def calculate_error(quadgram,defaultquadgram):
     totalerr = 0
     for quad in quadgram:
-        defval = defaultquadgram[quad] if quad in defaultquadgram else -.1
-        totalerr+= (quadgram[quad]-defval)
+        defval = defaultquadgram[quad] if quad in defaultquadgram else 0
+        totalerr+= abs(defval-quadgram[quad])
     return totalerr
+
 
 def calculate_error_text(text,defaultquadgram):
     quadgram = countquadgrams(text)
@@ -64,13 +65,59 @@ def columnar_decoder(text:str,key:list)->str:
     return result
 
 
+# hill climbing
+
+def fitness_key(key:list,encryptedtext:str,defaultquadgram):
+    decoded = columnar_decoder(encryptedtext,key)
+    return calculate_error_text(decoded,defaultquadgram)
+
+
+def getNeighbours(key):
+    neighbours = []
+    for i in range(len(key)):
+        for j in range(i + 1, len(key)):
+            neighbour = key.copy()
+            neighbour[i] = key[j]
+            neighbour[j] = key[i]
+            neighbours.append(neighbour)
+    neighbours.append([key[-1]] + key[:-1])
+    neighbours.append(key[1:] + [key[0]])
+    return neighbours
+
+
+def getBestNeighbour(keys,encryptedtext,defaultquadgram):
+    bestfitness = math.inf
+    bestkey = None
+    for key in keys:
+        currfitness = fitness_key(key,encryptedtext,defaultquadgram)
+        if currfitness < bestfitness:
+            bestfitness = currfitness
+            bestkey = key
+            
+    return bestkey,bestfitness
+    
+
+def hillclim(startkey,encryptedtext,defaultquadgram):
+    currsolution = startkey
+    currfitness = fitness_key(currsolution,encryptedtext,defaultquadgram)
+    neighbours = getNeighbours(currsolution)
+    
+    bestneighbour,bestneighbourfitness = getBestNeighbour(neighbours,encryptedtext,defaultquadgram)
+
+
+    while bestneighbourfitness < currfitness:
+        currsolution = bestneighbour
+        currfitness = bestneighbourfitness
+        neighbours = getNeighbours(currsolution)
+        bestneighbour,bestneighbourfitness = getBestNeighbour(neighbours,encryptedtext,defaultquadgram)
+    return currsolution,currfitness
 
 
 with open("default_quadgram.pkl", "rb") as quadfile:
     defaultquadgramarray = pickle.load(quadfile)
 
-encryptedtext = "ERHBEKOEONDASELEMNHOWJACBGEZGOENUELVE"
-encryptedtext.lower()
+encryptedtext = "JELBEEOLZRNJEEAEEHOEJKOEOUNTNNLJAEFEOETJEEAJEATEEAWLTHKTESARIZTBTNNEELLOEEEATITDLNEEDJOATTLNESEONOHNTELIOETNEEAJEATEEAWLTHKTESWOLKODKOPLTENDNTNOHOEZENEJGINORZREDAETNSMOUEENNEELLOEEEATITDIRMEKGOLNAEIGLMJVNVJIIOVNEEINIKLLLANNLRNONRGOATGTVNAAEEEWTNVELEENEUGJELORJEZIUIIAEVNNATZISAONETNENCEIGLPNGIEVNRGOATGTVNAAEEEWTKWEIMIAJOATTLNESEONOHNTELIKOEOUNTNNLJAEFEOETJEUGJELORJEZIUIIZVOHJEKOIADRNEELNEETLNNEELLOEEEATITDLNEEDNANDMNETNEEWDWHNEEEOEITEIOPLTENDNTNOHOEZENEJGINORZREDAETNSMOUEENLOVENANDMNETNEEWDWHNEIETELUMATZISAONETNENCEIGLPIOVNEEINIKLLLANNLRNOOPLTENDNTNOHOEWEETJENNGSATVNEWOLKODKOPLTENDNTNOHOEZENEJKKLRJBRHGNNEAIELNEETVEJDEATZISAONETNENCEIGLPIOVNEEINIKLLLANNLRNOZNGPKKLRJBRHGNNEAIELNEEEHOEJKOEOUNTNNLJAEFEOETJEUGJELORJEZIUIIAEVNNATZISAONETNENCEENNEIRIVEWNKAKRIOLMEEEUGJELORJEZIUIIAEVNNEAATNELEENWINSNEHNMHONEBZJOATTLNESEONOHNTELIKOEOUNTNNLJAEFEOETJEAOEGEAATNELEENWINSNEHNGROEDKGINORZREDAETNSMOUEENNEELLOEEEATITDLNEEDJOATTLNESEONOHNNEIBNLKEEIKGEANGROEDKGINORZREDAETNSMOUEENNLETRENZNELEAESGPLAKEDLOIOVNEEINIKLLLANNLRNOOPLTENDNTNOHOEZENEJOVZJNNLETRENZNELEAESGPIOLMEEEUGJELORJEZIUIIAEVNNATZISAONETNENCEIGLPIOVNEEINIKLLLANGMEETSEDTKDJNNIETELUMATZISAONETNENCEIGLPWEZHPJVOEBTERNNPAESAMGAIMKOEOUNTNNLJAEFEOETJEUGJELORJEZIUIIAEVNNIEAEWEZHPJVOEBTERNNPAELNEETLNNEELLOEEEATITDLNEEDJOATTLNESEONOHNTELIKOEOUNTNNLJAEFEEDFNDEEIIAIEEDKWEIMIAJOATTLNESEONOHNTELIELOAIEEMGIEBADNEALJGEMTNTGINORZREDAETNSMOUEENNEELLOEEEATITDLNEEDTNLOELOAIEEMGIEBADNEALJVNVJIIOVNEEINIKLLLANNLRNOOPLTENDNTNOHOEZENEJGINORZREDAETNSM"
+encryptedtext = encryptedtext.lower()
 keylenrange = [2,15]
 
 
@@ -87,7 +134,7 @@ for keylen in range(*keylenrange):
         err = calculate_error_text(decryptedtext,defaultquadgramarray)
         if [err,rkey] not in bestcases[f"{keylen}"]:
             bestcases[f"{keylen}"].append([err,rkey])
-
+    
 
 bestkeys = []
 for keylen in bestcases:
@@ -108,9 +155,24 @@ keylenuserin = input("Keylength? ")
 
 
 print("--------")
-newsols = []
 
-bestkey = bestcases[keylenuserin][0][1]
+
+latestkey = bestcases[keylenuserin][0][1]
+
+while True:
+    key,fitness = hillclim(latestkey,encryptedtext,defaultquadgramarray)
+    decoded = columnar_decoder(encryptedtext,key)
+    print(f"{round(fitness,5)} {key} {decoded[:min(len(decoded),10000)]}")
+
+    userin = input("try again (Q = quit)")
+    if userin.lower() == "q":
+        break
+    latestkey = list(range(int(keylenuserin)))
+    random.shuffle(latestkey)
+
+
+"""
+newsols = []
 for _ in range(max(2,min(400,2*math.factorial(int(keylenuserin))))):
     rkey = bestkey.copy()
     random.shuffle(rkey)
@@ -126,3 +188,5 @@ for ind,i in enumerate(newsols):
     print(f"{i} {decoded}")
     if ind > 100:
         break
+
+print(calculate_error_text(columnar_decoder(encryptedtext,[4, 0, 5, 1, 6, 3, 2]),defaultquadgramarray))"""
