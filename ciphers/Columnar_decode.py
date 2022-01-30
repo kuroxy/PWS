@@ -47,3 +47,26 @@ if len(sys.argv)>3:
         f.write(result)
     print("done")
 
+
+
+
+
+
+
+
+def columnar_encode(key,text):
+    key = [7,4,3,5,6,1,2,0]
+
+    text = text.lower()
+    text = ''.join([i for i in text if i in COUNTED])
+
+    rows = {i:[] for i in key}
+
+    for idx, letter in enumerate(text):
+        row = key[idx%len(key)]
+        rows[row].append(letter)
+
+
+    rows = dict(sorted(rows.items()))
+
+    return "".join("".join(value) for li, value in rows.items())

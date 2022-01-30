@@ -16,8 +16,13 @@ grapherror = False
 counter = []
 previous = []
 
+
+
+
 file = "texts/artikelen.txt"
-tekst = """"""
+tekst = ""
+tekst = tekst.lower()
+
 
 
 if len(sys.argv) >1:
@@ -32,6 +37,8 @@ if errorbigramfile:
 
 tekst = tekst.lower()
 tekst = ''.join([i for i in tekst if i in COUNTED])
+
+
 
 for char in tekst:
     previous.append(char)

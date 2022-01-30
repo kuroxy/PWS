@@ -36,3 +36,26 @@ text = ''.join([i for i in text if i in COUNTED])
 result = "".join(crypt[char] for char in text)
 
 print(result)
+
+
+
+
+key = "ah,bk,co,dv,ex,ft,gq,iu,jm,lz,nw,py,rs"
+#4,3,5,1,2,0
+
+def key_from_list(keylist):
+    key = keylist.lower()
+    key = key.split(",")
+
+    crypt = {}
+    for comb in key:
+        crypt[comb[0]] = comb[1]
+        crypt[comb[1]] = comb[0]
+    return crypt
+
+
+def vatsyayana_encode(key,text):
+    text = text.lower()
+    text = ''.join([i for i in text if i in COUNTED])
+
+    return "".join(crypt[char] for char in text)

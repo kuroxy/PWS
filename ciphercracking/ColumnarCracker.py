@@ -64,7 +64,7 @@ def columnar_decoder(text:str,key:list)->str:
                 result += value[i]
     return result
 
-
+  
 # hill climbing
 
 def fitness_key(key:list,encryptedtext:str,defaultquadgram):
