@@ -19,8 +19,8 @@ previous = []
 
 
 
-file = "texts/artikelen.txt"
-tekst = ""
+file = ""
+tekst = """"""
 tekst = tekst.lower()
 
 

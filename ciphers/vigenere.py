@@ -1,6 +1,6 @@
 #https://gist.github.com/dssstr/aedbb5e9f2185f366c6d6b50fad3e4a4
 
-def encrypt(plaintext, key):
+def encode_Vigenere(plaintext, key):
     plaintext = plaintext.lower()
     plaintext = ''.join([i for i in plaintext if i in "abcdefghijklmnopqrstuvwxyz"])
     plaintext = plaintext.upper()
@@ -33,4 +33,5 @@ def decrypt(ciphertext, key):
     return plaintext
 
 
-print(encrypt("okke","abcd"))
+if __name__ == '__main__':
+    print(encode_Vigenere("okke","abcd"))

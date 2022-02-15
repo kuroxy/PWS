@@ -95,7 +95,7 @@ def getBestNeighbour(keys,encryptedtext,defaultquadgram):
             bestkey = key
             
     return bestkey,bestfitness
-    
+ 
 
 def hillclim(startkey,encryptedtext,defaultquadgram):
     currsolution = startkey
