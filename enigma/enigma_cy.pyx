@@ -57,7 +57,6 @@ cpdef cipher_char(list plugboard, list rotorwires,list offsets, list reflectorwi
 
     for rindex in range(3):
         val = winv(rotorwires[rindex],offsets[rindex], val)
-    
 
     return val_to_char(plugboard[val])
 

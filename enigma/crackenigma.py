@@ -96,8 +96,6 @@ def hillclim(plugboard,rotors,offsets,turnovers,reflector, encryptedtext,default
     return currsolution,currfitness
 
 
-
-
 def crackplugboard(rotorlist,offsetlist,turnoverlist,reflw,text,defaultquadgramarray):
     startingplugboard = enigma_cy.create_plugboard("")
     hillclimbplug = hillclim(startingplugboard,rotorlist,offsetlist,turnoverlist,reflw,text,defaultquadgramarray)
