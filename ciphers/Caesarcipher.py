@@ -11,8 +11,8 @@ def cipher_encode(text, key):
 
 if __name__ == '__main__':
 
-    tekst = "YGEFNQNADQPFARUSGDQFTUEAGF" # wat je wil versleutelen
-    sleutel = -64 # geheime sleutel
+    tekst = "ditiseenvoorbeeldvancaesarcipher" # wat je wil versleutelen
+    sleutel = 7 # geheime sleutel
     
     ZELFINPUT = False
     # ZELFINPUT aan als je zelf wilt invoeren tijdens running van het programmad

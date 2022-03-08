@@ -111,6 +111,7 @@ def hillclim(encryptedtext,key,defaultquadgram):
     return currsolution,currfitness
 
 
+
 with open("default_quadgram.pkl", "rb") as quadgramfile:
     defaultquadgramarray = pickle.load(quadgramfile)
     

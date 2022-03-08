@@ -34,4 +34,4 @@ def decrypt(ciphertext, key):
 
 
 if __name__ == '__main__':
-    print(encode_Vigenere("okke","abcd"))
+    print(encode_Vigenere("ditisvoorbeeldvigenerecipherdezekanooklastigzijnmetkortetekstendusvoorgemakvoegikwatextrateksttoeenkelejarennadathetgalactischkeizerrijkisvernietigdneemtthefirstorderhetopzichomdoortegaanwaarhetvorigekeizerrijkstoptedefocusindezetrilogieligtopkylorenenreykylorenisdegevallenzoonvanhansoloenleiaorganadieooitgetraindwerddoorlukeskywalker","kort"))

@@ -18,7 +18,7 @@ turnoverIII = enigma_cy.char_to_val("V")
 
 reflw = [ord(i)-65 for i in "YRUHQSLDPXNGOKMIEBFZCWVJAT"]
 
-plugboard = enigma_cy.create_plugboard("")
+
 
 
 
@@ -30,15 +30,15 @@ text = "".join(ch for ch in text if ch in "abcdefghijklmnopqrstuvwxyz")
 # how to encode
 print(enigma_cy.encode_enigma(plugboard, [rotorIw,rotorIIw,rotorIIIw],[offset],[turnoverI,turnoverII,turnoverIII], reflw, text))
 
-"""
+
 times = time.time()
 
 
 a = enigma_cy.crack_offset(plugboard, [rotorIw,rotorIIw,rotorIIIw],[turnoverI,turnoverII,turnoverIII], reflw, text)
+"""
 
-a.sort(key = lambda x: -enigma_cy.IoC(x[1]))
-for i in range(100):
-    
-    print(f"{enigma_cy.IoC(a[i][1])} {[ enigma_cy.val_to_char(i) for i in a[i][0]]}")
 
-print(f"{time.time()-times} seconds")
+text = "zouditeenvoorbeeldvanenigmazijnofishetmaareenillusierotorszijndrieeentweemetoffseteentweedrieenplugboordmetazbl"
+plugboard = enigma_cy.create_plugboard("azbl")
+print(enigma_cy.encode_enigma(plugboard, [rotorIIIw,rotorIw,rotorIIw], [1,2,3],[turnoverIII,turnoverI,turnoverII], reflw, text))
+

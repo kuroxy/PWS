@@ -22,8 +22,8 @@ def columnar_encode(text:str,key:list):
 
 if __name__ == '__main__':
     
-    text = """"""
-    key = "7,4,3,5,6,1,2,0"
+    text = """ditisvoorbeeldvancolumnartranspositioncipherdezeiswellastigomtekrakenomdathetwerktopbigram"""
+    key = "4,3,5,1,2,0"
     #4,3,5,1,2,0
 
     if len(sys.argv)>1:
